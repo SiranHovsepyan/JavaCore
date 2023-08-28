@@ -24,7 +24,7 @@ public class FigurePainter {
 //        Third example of homework1
         for (int i = 0; i < 5; i++) {
             for (int j = 3; j >= i; j--) {
-                System.out.print(" l ");
+                System.out.print("  ");
             }
             for (int t = 0; t <= i; t++) {
                 System.out.print("* ");
