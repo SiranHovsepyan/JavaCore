@@ -4,9 +4,15 @@ public class Box {
     double width;
     double height;
     double depth;
+    Box(double w,double h,double d){
+        System.out.println("Construct bject box");
+        width=w;
+        height=h;
+        depth=d;
+    }
 
-    void volume() {
-        System.out.print("Обьем   ");
-        System.out.print(width * height * depth);
+    double volume() {
+        return width * height * depth;
+
     }
 }
