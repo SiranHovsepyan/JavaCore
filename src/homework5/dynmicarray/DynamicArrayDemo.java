@@ -20,8 +20,17 @@ public class DynamicArrayDemo {
         myDynamicArray.add(9);
         myDynamicArray.add(56);
         myDynamicArray.add(77);
-        System.out.println("\n" + myDynamicArray.getByIndex(10));
+        System.out.println("\n" + myDynamicArray.getByIndex(4));
         myDynamicArray.print();
-
+        myDynamicArray.deleteByIndex(5);
+        myDynamicArray.print();
+        myDynamicArray.set(2,83);
+        myDynamicArray.print();
+        myDynamicArray.add(1,33);
+        myDynamicArray.print();
+        myDynamicArray.add(7,56);
+        myDynamicArray.print();
+        System.out.println(myDynamicArray.exists(-1));
+        System.out.println(myDynamicArray.getIndexByValue(77));
     }
 }
