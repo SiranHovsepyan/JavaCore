@@ -88,7 +88,6 @@ public class DynamicArray {
     public int getIndexByValue(int value) {
         for (int i = 0; i < size; i++) {
             if (array[i] == value) {
-                array[i] = value;
                 return i;
             }
         }
