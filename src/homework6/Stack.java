@@ -9,11 +9,9 @@ public class Stack {
         tos = -1;
     }
 
-    void push(int ch) {
-        if (tos == stck.length - 1)
-            extend();
-        else
-            stck[++tos] = ch;
+    public void push(int ch) {
+        if (tos == stck.length - 1) extend();
+        else stck[++tos] = ch;
     }
 
     private void extend() {
@@ -24,15 +22,14 @@ public class Stack {
         stck = stcks;
     }
 
-    int pop() {
+    public int pop() {
         if (tos < 0) {
-            System.out.println("Stack isn`t full");
+//            System.out.println("Stack isn`t full");
             return 0;
-        } else
-            return stck[tos--];
+        } else return stck[tos--];
     }
 
-    public int lastIndex() {
-        return stck[tos];
+    public int getIndex() {
+        return tos;
     }
 }
