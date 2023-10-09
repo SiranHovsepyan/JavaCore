@@ -41,13 +41,13 @@ public class EmployeeStorage {
     }
 
 
-    public void changebyID(String employeeID) {
+    public Employee changebyID(String employeeID) {
         for (int i = 0; i < size; i++) {
             if (employees[i].getEmployeeID().equals(employeeID)) {
-                System.out.println(employees[i]);
+                return employees[i];
             }
         }
-
+        return null;
     }
 
     public void searchEmployee(String companyName) {

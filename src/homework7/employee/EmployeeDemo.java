@@ -43,7 +43,7 @@ public class EmployeeDemo {
     private static void changeByEmployeeID() {
         System.out.println("Please input employeeID for change data`s ");
         String employeeID = scanner.nextLine();
-        employeeStorage.changebyID(employeeID);
+        Employee employeeFromStorage = employeeStorage.changebyID(employeeID);
         System.out.println("If you want to change the name please input 1");
         System.out.println("if you want to change the surname please input 2");
         System.out.println("if you want to change the salary please input 3");
@@ -54,27 +54,27 @@ public class EmployeeDemo {
             case "1":
                 System.out.println("Please input employee name for change");
                 String name = scanner.nextLine();
-                employeeStorage.changebyID(name);
+                employeeFromStorage.setName(name);
                 break;
             case "2":
                 System.out.println("Please input employee surname for change");
                 String surname = scanner.nextLine();
-                employeeStorage.changebyID(surname);
+                employeeFromStorage.setSurname(surname);
                 break;
             case "3":
                 System.out.println("Please input size of the salary for change");
                 double salary = Double.parseDouble(scanner.nextLine());
-                employeeStorage.changebyID(String.valueOf(salary));
+                employeeFromStorage.setSalary(salary);
                 break;
             case "4":
                 System.out.println("Please input name of the company for change");
                 String company = scanner.nextLine();
-                employeeStorage.changebyID(company);
+               employeeFromStorage.setCompany(company);
                 break;
             case "5":
                 System.out.println("Please input the position in company for change");
                 String position = scanner.nextLine();
-                employeeStorage.changebyID(position);
+                employeeFromStorage.setPosition(position);
                 break;
             default:
                 System.out.println("Incorrect command!!!!!!");
