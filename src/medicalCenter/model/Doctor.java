@@ -1,6 +1,8 @@
-package medicalCenter;
+package medicalCenter.model;
 
-public class Doctor extends Person{
+import java.util.Objects;
+
+public class Doctor extends Person {
     private String email;
     private String profession;
 
@@ -32,6 +34,22 @@ public class Doctor extends Person{
 
     public void setProfession(String profession) {
         this.profession = profession;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Doctor doctor)) return false;
+
+        if (!Objects.equals(email, doctor.email)) return false;
+        return Objects.equals(profession, doctor.profession);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = email != null ? email.hashCode() : 0;
+        result = 31 * result + (profession != null ? profession.hashCode() : 0);
+        return result;
     }
 
     @Override

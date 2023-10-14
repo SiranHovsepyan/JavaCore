@@ -1,4 +1,6 @@
-package medicalCenter;
+package medicalCenter.model;
+
+import java.util.Objects;
 
 public class Person {
     private String id;
@@ -46,6 +48,26 @@ public class Person {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person person)) return false;
+
+        if (!Objects.equals(id, person.id)) return false;
+        if (!Objects.equals(name, person.name)) return false;
+        if (!Objects.equals(surname, person.surname)) return false;
+        return Objects.equals(phoneNumber, person.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        return result;
     }
 
     @Override
