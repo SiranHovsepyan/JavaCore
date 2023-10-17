@@ -6,6 +6,7 @@ import medicalCenter.storage.DoctorStorage;
 import medicalCenter.storage.PatientStorage;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class MedicalCenterManagementMain {
@@ -88,9 +89,9 @@ public class MedicalCenterManagementMain {
             System.out.println("DOCTOR with " + doctorId + " does not exists");
             return;
         }
-        System.out.println("Please input date time(dd-MM-yyyy)");
-        String registerDateTime = scanner.nextLine();
-        Patient patient = new Patient(patientId, patientName, patientSurname, patientPhone, registerDateTime, doctorFromStorage);
+        Date registerDateTime = new Date();
+        Patient patient = new Patient(patientId, patientName,
+                patientSurname, patientPhone, registerDateTime, doctorFromStorage);
         patientStorage.addPatient(patient);
         System.out.println("Patient created!");
     }
@@ -146,7 +147,7 @@ public class MedicalCenterManagementMain {
         String doctorId = scanner.nextLine();
         Doctor doctorFromStorage = doctorStorage.getById(doctorId);
         if (doctorFromStorage != null) {
-            System.out.println("Doctor with ID" + doctorId + " does exists");
+            System.out.println("Doctor with ID " + doctorId + " does exists");
             return;
         }
         System.out.println("Please input name of DOCTOR");
@@ -159,7 +160,8 @@ public class MedicalCenterManagementMain {
         String doctorPhoneNumber = scanner.nextLine();
         System.out.println("Please input  profession of DOCTOR");
         String doctorProfession = scanner.nextLine();
-        Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, doctorEmail, doctorPhoneNumber, doctorProfession);
+        Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, doctorEmail,
+                doctorPhoneNumber, doctorProfession);
         doctorStorage.addDoctor(doctor);
         System.out.println("Doctor created!");
 

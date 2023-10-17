@@ -1,5 +1,9 @@
 package classwork.chapter8.employeemanagement;
 
+import classwork.chapter8.employeemanagement.util.DateUtil;
+
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class EmployeeManagementMain {
@@ -7,7 +11,7 @@ public class EmployeeManagementMain {
     private static EmployeeStorage employeeStorage = new EmployeeStorage();
     private static CompanyStorage companyStorage = new CompanyStorage();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         boolean isRun = true;
         while (isRun) {
             printCommands();
@@ -184,7 +188,7 @@ public class EmployeeManagementMain {
         System.out.println("company registered");
     }
 
-    private static void addEmployee() {
+    private static void addEmployee() throws ParseException {
         System.out.println("please chosse company");
         companyStorage.print();
         String companyId = scanner.nextLine();
@@ -210,7 +214,12 @@ public class EmployeeManagementMain {
         String employeePosition = scanner.nextLine();
         System.out.println("please input employee salary");
         double employeeSalary = Double.parseDouble(scanner.nextLine());
-        Employee employee = new Employee(employeeId, employeeName, employeeSurname, employeePhone, employeeSalary, employeePosition, companyFromStorage);
+        System.out.println("Please input employee date of birthday(dd-mm-yyyy)");
+        String dateOfBirthdayStr = scanner.nextLine();
+        Date dateOfBirthday = DateUtil.stringToDate(dateOfBirthdayStr);
+        Date registerDate = new Date();
+
+        Employee employee = new Employee(employeeId, employeeName, employeeSurname, employeePhone, employeeSalary, employeePosition, companyFromStorage,dateOfBirthday,registerDate);
         employeeStorage.add(employee);
         System.out.println("employee registered");
     }

@@ -15,6 +15,7 @@ public class DateExample {
         System.out.println("plesse input birthday(dd-MM-yyyy)");
         String birthdayStr = scanner.nextLine();
         Date date = sdf.parse(birthdayStr);
+
         System.out.println(date);
 
 // sa erb compic e petq vercnel jamy
