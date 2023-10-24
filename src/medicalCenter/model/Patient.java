@@ -60,7 +60,7 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return super.toString() +
+        return "Patient"+super.toString() +
                 "registerDateTime='" + DateUtil.dateTimeToString(registerDateTime) + '\'' +
                 ", doctor=" + doctor +
                 "} " ;

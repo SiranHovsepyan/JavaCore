@@ -1,47 +1,49 @@
 package medicalCenter;
 
+
 import medicalCenter.model.Doctor;
 import medicalCenter.model.Patient;
 import medicalCenter.storage.DoctorStorage;
 import medicalCenter.storage.PatientStorage;
+import medicalCenter.util.DateUtil;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-public class MedicalCenterManagementMain {
+public class MedicalCenterManagementMain implements Commands {
     static Scanner scanner = new Scanner(System.in);
     private static DoctorStorage doctorStorage = new DoctorStorage();
     private static PatientStorage patientStorage = new PatientStorage();
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         boolean isRun = true;
         while (isRun) {
-            printAllCommands();
+            Commands.printAllCommands();
             String command = scanner.nextLine();
             switch (command) {
-                case "0":
+                case EXIT:
                     isRun = false;
                     break;
-                case "1":
+                case ADD_DOCTOR:
                     addDoctor();
                     break;
-                case "2":
+                case SEARCH_DOCTOR_BY_PROFESSION:
                     searchDoctorByProfession();
                     break;
-                case "3":
+                case DELETE_DOCTOR_BY_ID:
                     deleteDoctorById();
                     break;
-                case "4":
+                case CHANGE_DOCTOR_BY_ID:
                     changeDoctorById();
                     break;
-                case "5":
+                case ADD_PATIENT:
                     addPatient();
                     break;
-                case "6":
+                case PRINT_ALL_PATIENTS_BY_DOCTOR:
                     printAllPatientsByDoctor();
                     break;
-                case "7":
+                case PRINT_ALL_PATIENTS:
                     printAllPatients();
                     break;
                 default:
@@ -89,7 +91,15 @@ public class MedicalCenterManagementMain {
             System.out.println("DOCTOR with " + doctorId + " does not exists");
             return;
         }
-        Date registerDateTime = new Date();
+        System.out.println("Please input register date Time(dd-MM-yyyy hh:mm)");
+        String registerDateTimeStr = scanner.nextLine();
+        Date registerDateTime = null;
+        try {
+            registerDateTime = DateUtil.stringToDateTime(registerDateTimeStr);
+        } catch (ParseException e) {
+            System.out.println("Date is incorrect!");
+        }
+
         Patient patient = new Patient(patientId, patientName,
                 patientSurname, patientPhone, registerDateTime, doctorFromStorage);
         patientStorage.addPatient(patient);
@@ -128,7 +138,11 @@ public class MedicalCenterManagementMain {
         System.out.println("Please input doctor id for delete");
         String doctorId = scanner.nextLine();
         doctorStorage.deleteDoctorById(doctorId);
-        System.out.println("Doctor is deleted!!!");
+        Doctor doctor = doctorStorage.getById(doctorId);
+        while (patientStorage.searchPatientByDoctorId(doctor) != null) {
+            patientStorage.deletePatientByDoctorId(doctor);
+        }
+        System.out.println("Doctor with patients deleted!!!");
     }
 
     private static void searchDoctorByProfession() {
@@ -167,14 +181,5 @@ public class MedicalCenterManagementMain {
 
     }
 
-    private static void printAllCommands() {
-        System.out.println("Please input 0 for EXIT");
-        System.out.println("Please input 1 for ADD DOCTOR");
-        System.out.println("Please input 2 for SEARCH DOCTOR BY PROFESSION");
-        System.out.println("Please input 3 for DELETE DOCTOR BY ID");
-        System.out.println("Please input 4 for CHANGE DOCTOR BY ID");
-        System.out.println("Please input 5 for ADD PATIENT");
-        System.out.println("Please input 6 for PRINT ALL PATIENTS BY DOCTOR");
-        System.out.println("Please input 7 for PRINT ALL PATIENTS");
-    }
+
 }
