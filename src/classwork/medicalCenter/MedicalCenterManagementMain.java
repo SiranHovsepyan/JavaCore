@@ -1,11 +1,12 @@
-package medicalCenter;
+package classwork.medicalCenter;
 
 
-import medicalCenter.model.Doctor;
-import medicalCenter.model.Patient;
-import medicalCenter.storage.DoctorStorage;
-import medicalCenter.storage.PatientStorage;
-import medicalCenter.util.DateUtil;
+import classwork.medicalCenter.exception.PersonNotFoundException;
+import classwork.medicalCenter.model.Doctor;
+import classwork.medicalCenter.model.Patient;
+import classwork.medicalCenter.storage.DoctorStorage;
+import classwork.medicalCenter.storage.PatientStorage;
+import classwork.medicalCenter.util.DateUtil;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -61,12 +62,18 @@ public class MedicalCenterManagementMain implements Commands {
         System.out.println("Please choose DOCTOR");
         doctorStorage.print();
         String doctorId = scanner.nextLine();
-        Doctor doctorFormStorage = doctorStorage.getById(doctorId);
-        if (doctorFormStorage == null) {
-            System.out.println("Doctor with " + doctorId + " does not exists");
-            return;
+        Doctor doctorFormStorage = null;
+        try {
+            doctorFormStorage = doctorStorage.getById(doctorId);
+            patientStorage.printAllPatientsByDoctor(doctorFormStorage);
+        } catch (PersonNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        patientStorage.printAllPatientsByDoctor(doctorFormStorage);
+//        if (doctorFormStorage == null) {
+//            System.out.println("Doctor with " + doctorId + " does not exists");
+//            return;
+//        }
+
     }
 
     private static void addPatient() {
@@ -86,24 +93,30 @@ public class MedicalCenterManagementMain implements Commands {
         System.out.println("Please choose DOCTOR with doctorId");
         doctorStorage.print();
         String doctorId = scanner.nextLine();
-        Doctor doctorFromStorage = doctorStorage.getById(doctorId);
-        if (doctorFromStorage == null) {
-            System.out.println("DOCTOR with " + doctorId + " does not exists");
-            return;
-        }
-        System.out.println("Please input register date Time(dd-MM-yyyy hh:mm)");
-        String registerDateTimeStr = scanner.nextLine();
-        Date registerDateTime = null;
+        Doctor doctorFromStorage = null;
         try {
-            registerDateTime = DateUtil.stringToDateTime(registerDateTimeStr);
-        } catch (ParseException e) {
-            System.out.println("Date is incorrect!");
-        }
+            doctorFromStorage = doctorStorage.getById(doctorId);
+            System.out.println("Please input register date Time(dd-MM-yyyy hh:mm)");
+            String registerDateTimeStr = scanner.nextLine();
+            Date registerDateTime = null;
+            try {
+                registerDateTime = DateUtil.stringToDateTime(registerDateTimeStr);
+            } catch (ParseException e) {
+                System.out.println("Date is incorrect!");
+            }
 
-        Patient patient = new Patient(patientId, patientName,
-                patientSurname, patientPhone, registerDateTime, doctorFromStorage);
-        patientStorage.addPatient(patient);
-        System.out.println("Patient created!");
+            Patient patient = new Patient(patientId, patientName,
+                    patientSurname, patientPhone, registerDateTime, doctorFromStorage);
+            patientStorage.addPatient(patient);
+            System.out.println("Patient created!");
+        } catch (PersonNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+//        if (doctorFromStorage == null) {
+//            System.out.println("DOCTOR with " + doctorId + " does not exists");
+//            return;
+//        }
+
     }
 
     private static void changeDoctorById() {
@@ -138,11 +151,17 @@ public class MedicalCenterManagementMain implements Commands {
         System.out.println("Please input doctor id for delete");
         String doctorId = scanner.nextLine();
         doctorStorage.deleteDoctorById(doctorId);
-        Doctor doctor = doctorStorage.getById(doctorId);
-        while (patientStorage.searchPatientByDoctorId(doctor) != null) {
-            patientStorage.deletePatientByDoctorId(doctor);
+        Doctor doctor = null;
+        try {
+            doctor = doctorStorage.getById(doctorId);
+            while (patientStorage.searchPatientByDoctorId(doctor) != null) {
+                patientStorage.deletePatientByDoctorId(doctor);
+            }
+            System.out.println("Doctor with patients deleted!!!");
+        } catch (PersonNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        System.out.println("Doctor with patients deleted!!!");
+
     }
 
     private static void searchDoctorByProfession() {
@@ -159,25 +178,32 @@ public class MedicalCenterManagementMain implements Commands {
     private static void addDoctor() {
         System.out.println("Please input ID for DOCTOR");
         String doctorId = scanner.nextLine();
-        Doctor doctorFromStorage = doctorStorage.getById(doctorId);
-        if (doctorFromStorage != null) {
-            System.out.println("Doctor with ID " + doctorId + " does exists");
-            return;
+        Doctor doctorFromStorage = null;
+        try {
+            doctorFromStorage = doctorStorage.getById(doctorId);
+            System.out.println("Please input name of DOCTOR");
+            String doctorName = scanner.nextLine();
+            System.out.println("Please input surname of DOCTOR");
+            String doctorSurname = scanner.nextLine();
+            System.out.println("Please input  email of DOCTOR");
+            String doctorEmail = scanner.nextLine();
+            System.out.println("Please input  phoneNumber of DOCTOR");
+            String doctorPhoneNumber = scanner.nextLine();
+            System.out.println("Please input  profession of DOCTOR");
+            String doctorProfession = scanner.nextLine();
+            Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, doctorEmail,
+                    doctorPhoneNumber, doctorProfession);
+            doctorStorage.addDoctor(doctor);
+            System.out.println("Doctor created!");
+
+        } catch (PersonNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        System.out.println("Please input name of DOCTOR");
-        String doctorName = scanner.nextLine();
-        System.out.println("Please input surname of DOCTOR");
-        String doctorSurname = scanner.nextLine();
-        System.out.println("Please input  email of DOCTOR");
-        String doctorEmail = scanner.nextLine();
-        System.out.println("Please input  phoneNumber of DOCTOR");
-        String doctorPhoneNumber = scanner.nextLine();
-        System.out.println("Please input  profession of DOCTOR");
-        String doctorProfession = scanner.nextLine();
-        Doctor doctor = new Doctor(doctorId, doctorName, doctorSurname, doctorEmail,
-                doctorPhoneNumber, doctorProfession);
-        doctorStorage.addDoctor(doctor);
-        System.out.println("Doctor created!");
+//        if (doctorFromStorage != null) {
+//            System.out.println("Doctor with ID " + doctorId + " does exists");
+//            return;
+//        }
+
 
     }
 

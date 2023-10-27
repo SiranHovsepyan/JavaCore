@@ -1,19 +1,20 @@
-package medicalCenter.storage;
+package classwork.medicalCenter.storage;
 
-import medicalCenter.exception.PersonNotFoundException;
-import medicalCenter.model.Doctor;
+import classwork.medicalCenter.exception.PersonNotFoundException;
+import classwork.medicalCenter.model.Doctor;
 
 public class DoctorStorage {
     private Doctor[] doctors = new Doctor[10];
     private int size;
 
-    public Doctor getById(String doctorId) {
+    public Doctor getById(String doctorId) throws PersonNotFoundException {
         for (int i = 0; i < size; i++) {
             if (doctors[i].getId().equals(doctorId)) {
                 return doctors[i];
             }
         }
-        return null;
+//        return null;
+        throw new PersonNotFoundException("Doctor with: "+doctorId+" does not found");
     }
 
     public Doctor searchDoctorByProfession(String doctorProfession) {
