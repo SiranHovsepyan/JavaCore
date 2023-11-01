@@ -34,6 +34,15 @@ public class UserStorage {
         return null;
     }
 
+    public User getUserEmail(String email){
+        for (int i = 0; i < size; i++) {
+            if (users[i].getEmail().equals(email)){
+                return users[i];
+            }
+        }
+        return null;
+    }
+
 
     public User getUserEmailPassword(String email, String password) {
         for (int i = 0; i < size; i++) {

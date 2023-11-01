@@ -10,15 +10,15 @@ public class Product {
     private String productDescription;
     private double productPrice;
     private int stockQty;
-    private ProductsType products;
+    private ProductsType type;
 
-    public Product(String productId, String productName, String productDescription, double productPrice, int stockQty, ProductsType products) {
+    public Product(String productId, String productName, String productDescription, double productPrice, int stockQty, ProductsType type) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.stockQty = stockQty;
-        this.products = products;
+        this.type = type;
     }
 
     public Product() {
@@ -64,12 +64,12 @@ public class Product {
         this.stockQty = stockQty;
     }
 
-    public ProductsType getProducts() {
-        return products;
+    public ProductsType getType() {
+        return type;
     }
 
-    public void setProducts(ProductsType products) {
-        this.products = products;
+    public void setType(ProductsType type) {
+        this.type = type;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Product {
         if (!Objects.equals(productName, product.productName)) return false;
         if (!Objects.equals(productDescription, product.productDescription))
             return false;
-        return products == product.products;
+        return type == product.type;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Product {
         temp = Double.doubleToLongBits(productPrice);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + stockQty;
-        result = 31 * result + (products != null ? products.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 
@@ -108,7 +108,7 @@ public class Product {
                 ", productDescription='" + productDescription + '\'' +
                 ", productPrice=" + productPrice +
                 ", stockQty=" + stockQty +
-                ", products=" + products +
+                ", type=" + type +
                 '}';
     }
 }
