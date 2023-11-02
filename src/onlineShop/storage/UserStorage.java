@@ -26,6 +26,15 @@ public class UserStorage {
         }
     }
 
+    public void printOnlyUsers() {
+        for (int i = 0; i < size; i++) {
+            if (users[i].getType() == UserAdminType.USER) {
+                System.out.println(users[i].getType());
+            }
+            System.out.println("USERS doesn`t exists");
+        }
+    }
+
     public UserAdminType getType(String userType) {
         if (userType.equals(UserAdminType.ADMIN.name()) ||
                 userType.equals(UserAdminType.USER.name())) {
@@ -34,9 +43,9 @@ public class UserStorage {
         return null;
     }
 
-    public User getUserEmail(String email){
+    public User getUserEmail(String email) {
         for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email)){
+            if (users[i].getEmail().equals(email)) {
                 return users[i];
             }
         }
@@ -53,5 +62,12 @@ public class UserStorage {
         return null;
     }
 
-
+    public User getById(String userId) {
+        for (int i = 0; i < size; i++) {
+            if (users[i].getId().equals(userId)) {
+                return users[i];
+            }
+        }
+        return null;
+    }
 }

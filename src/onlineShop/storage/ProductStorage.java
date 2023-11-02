@@ -44,4 +44,13 @@ public class ProductStorage {
         }
         size--;
     }
+    public Product getById(String productId) {
+        for (int i = 0; i < size; i++) {
+            if (products[i].getProductId().equals(productId)) {
+                return products[i];
+            }
+        }
+        return null;
+    }
+
 }

@@ -1,7 +1,9 @@
 package onlineShop;
 
+import onlineShop.enums.PaymentMethod;
 import onlineShop.enums.ProductsType;
 import onlineShop.enums.UserAdminType;
+import onlineShop.model.Order;
 import onlineShop.model.Product;
 import onlineShop.model.User;
 import onlineShop.storage.OrderStorage;
@@ -53,6 +55,11 @@ public class OnlineShopMain {
 //        String id = UUIdUtil.generateId();
         System.out.println("Please input ID");
         String userId = scanner.nextLine();
+        User userFromStorage = userStorage.getById(userId);
+        if (userFromStorage != null) {
+            System.out.println("User or Admin with ID: " + userId + " does exists");
+            return;
+        }
         System.out.println("Please input name ");
         String userName = scanner.nextLine();
         System.out.println("Please input 'USER' or 'ADMIN'");
@@ -75,10 +82,65 @@ public class OnlineShopMain {
         User userAdmin = userStorage.getUserEmailPassword(userEmail, userPassword);
         if (userAdmin != null && userPassword != null) {
 
-            adminCommands();
+//            adminCommands();
+
+                userCommands();
+
         } else {
             System.out.println("Incorrect Email or PASSWORD, please try again!");
         }
+    }
+
+    private static void userCommands() {
+        boolean isRun = true;
+        while (isRun) {
+            Command.printUserCommands();
+            String command = scanner.nextLine();
+            switch (command) {
+                case LOGOUT:
+                    isRun = false;
+                    break;
+                case PRINT_ALL_PRODUCTS:
+                    printProducts();
+                    break;
+                case BUY_PRODUCT:
+                    buyProduct();
+                    break;
+                case PRINT_MY_ORDERS:
+                    break;
+                case CANCEL_ORDER_BY_ID:
+                    break;
+                default:
+                    System.out.println("Incorrect command!!!");
+            }
+        }
+    }
+
+    private static void buyProduct() {
+        System.out.println("Please input product ID");
+        String productId = scanner.nextLine();
+        Product productFromStorage = productStorage.getById(productId);
+        if (productFromStorage == null) {
+            System.out.println("Products with ID: " + productId + " does not exists");
+            return;
+        }
+        System.out.println("Please input product quantity");
+        int productQuantity = 0;
+        try {
+            productQuantity = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.err.println("Error: " + e.getMessage());
+            return;
+        }
+        System.out.println("Please input payment method(CARD,CASH,PAYPAL)");
+        String paymentMethod = scanner.nextLine().toUpperCase();
+        PaymentMethod payment = orderStorage.getType(paymentMethod);
+        if (payment == null) {
+            System.out.println("Please input CARD,CASH or PAYPAL");
+            return;
+        }
+
+
     }
 
     private static void adminCommands() {
@@ -97,12 +159,13 @@ public class OnlineShopMain {
                     removeProductById();
                     break;
                 case PRINT_PRODUCTS:
-                    productStorage.print();
+                    printProducts();
                     break;
                 case PRINT_USERS:
-                    userStorage.print();
+                    printUsers();
                     break;
                 case PRINT_ORDERS:
+                    printOrders();
                     break;
                 case CHANGE_ORDER_STATUS:
                     break;
@@ -111,6 +174,18 @@ public class OnlineShopMain {
             }
         }
 
+    }
+
+    private static void printOrders() {
+        orderStorage.print();
+    }
+
+    private static void printUsers() {
+        userStorage.printOnlyUsers();
+    }
+
+    private static void printProducts() {
+        productStorage.print();
     }
 
     private static void removeProductById() {
@@ -122,6 +197,11 @@ public class OnlineShopMain {
     private static void addProduct() {
         System.out.println("Please input product ID");
         String productId = scanner.nextLine();
+        Product productFromStorage = productStorage.getById(productId);
+        if (productFromStorage == null) {
+            System.out.println("Products with ID: " + productId + " does not exists");
+            return;
+        }
         System.out.println("Please input product Name");
         String productName = scanner.nextLine();
         System.out.println("Please write the description");
