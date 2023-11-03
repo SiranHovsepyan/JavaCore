@@ -1,6 +1,7 @@
 package onlineShop.storage;
 
 import onlineShop.enums.ProductsType;
+import onlineShop.exceptions.OutOfStockException;
 import onlineShop.model.Product;
 
 public class ProductStorage {
@@ -12,12 +13,6 @@ public class ProductStorage {
             System.out.println(products[i]);
         }
     }
-
-    private void extend() {
-        Product[] tmp = new Product[products.length + 10];
-        System.arraycopy(products, 0, tmp, 0, products.length);
-    }
-
 
     public void addProducts(Product product) {
         if (size == products.length) {
@@ -35,15 +30,15 @@ public class ProductStorage {
         return null;
     }
 
-
     public void removeProduct(String productId) {
         for (int i = 0; i < size; i++) {
-            if(products[i].getProductId().equals(productId)){
-                products[i] = products[i+1];
+            if (products[i].getProductId().equals(productId)) {
+                products[i] = products[i + 1];
             }
         }
         size--;
     }
+
     public Product getById(String productId) {
         for (int i = 0; i < size; i++) {
             if (products[i].getProductId().equals(productId)) {
@@ -51,6 +46,20 @@ public class ProductStorage {
             }
         }
         return null;
+    }
+
+    public int getProductQty(String id, int qty) throws OutOfStockException {
+        for (int i = 0; i < size; i++) {
+            if (products[i].getProductId().equals(id) && products[i].getStockQty() >= qty) {
+                return qty;
+            }
+        }
+        throw new OutOfStockException ("Out of stock");
+    }
+
+    private void extend() {
+        Product[] tmp = new Product[products.length + 10];
+        System.arraycopy(products, 0, tmp, 0, products.length);
     }
 
 }

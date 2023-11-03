@@ -9,14 +9,14 @@ import java.util.Objects;
 public class Order {
     private String orderId;
     private User user;
-    private Product product;
+    private String product;
     private Date date;
     private double orderPrice;
     private OrderStatus orderStatus;
     private int qty;
     private PaymentMethod paymentMethod;
 
-    public Order(String orderId, User user, Product product, Date date, double orderPrice, OrderStatus orderStatus, int qty, PaymentMethod paymentMethod) {
+    public Order(String orderId, User user, String product, Date date, double orderPrice, OrderStatus orderStatus, int qty, PaymentMethod paymentMethod) {
         this.orderId = orderId;
         this.user = user;
         this.product = product;
@@ -46,11 +46,11 @@ public class Order {
         this.user = user;
     }
 
-    public Product getProduct() {
+    public String getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(String product) {
         this.product = product;
     }
 
@@ -130,7 +130,7 @@ public class Order {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", user=" + user +
-                ", product=" + product +
+                ", product='" + product + '\'' +
                 ", date=" + date +
                 ", orderPrice=" + orderPrice +
                 ", orderStatus=" + orderStatus +

@@ -31,7 +31,7 @@ public interface Command {
         System.out.println("Please input " + PRINT_PRODUCTS + " for PRINT PRODUCTS");
         System.out.println("Please input " + PRINT_USERS + " for PRINT USERS");
         System.out.println("Please input " + PRINT_ORDERS + " for PRINT ORDERS");
-        System.out.println("Please input " + CHANGE_ORDER_STATUS + " for  CHANGE ORDER STATUS");
+        System.out.println("Please input " + CHANGE_ORDER_STATUS + " for CHANGE ORDER STATUS");
     }
 
     static void printUserCommands() {
@@ -39,7 +39,7 @@ public interface Command {
         System.out.println("Please input " + PRINT_ALL_PRODUCTS + " for PRINT ALL PRODUCTS");
         System.out.println("Please input " + BUY_PRODUCT + " for buy PRODUCTS");
         System.out.println("Please input " + PRINT_MY_ORDERS + " for PRINT MY ORDERS");
-        System.out.println("Please input " + CANCEL_ORDER_BY_ID + "f or CANCEL ORDER");
+        System.out.println("Please input " + CANCEL_ORDER_BY_ID + " for CANCEL ORDER");
     }
 
 
