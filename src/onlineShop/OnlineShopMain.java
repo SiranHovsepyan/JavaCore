@@ -12,7 +12,6 @@ import onlineShop.util.UUIdUtil;
 
 import java.util.Date;
 import java.util.Scanner;
-import java.util.UUID;
 
 import static onlineShop.Command.*;
 
@@ -56,8 +55,6 @@ public class OnlineShopMain {
         System.out.println("Please input password ");
         String userPassword = scanner.nextLine();
         String userId = UUIdUtil.generateId();
-//        System.out.println("Please input ID");
-//        String userId = scanner.nextLine();
         User userFromStorage = userStorage.getById(userId);
         if (userFromStorage != null) {
             System.out.println("User or Admin with ID: " + userId + " does exists");
