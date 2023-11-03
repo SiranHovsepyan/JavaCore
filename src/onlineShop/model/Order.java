@@ -128,14 +128,14 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderId='" + orderId + '\'' +
-                ", user=" + user +
-                ", product='" + product + '\'' +
+                "orderId = '" + orderId + '\'' +
+                ", user =" + user +
+                ", product = '" + product + '\'' +
                 ", date=" + date +
-                ", orderPrice=" + orderPrice +
-                ", orderStatus=" + orderStatus +
-                ", qty=" + qty +
-                ", paymentMethod=" + paymentMethod +
+                ", orderPrice = " + orderPrice +
+                ", orderStatus = " + orderStatus +
+                ", qty = " + qty +
+                ", paymentMethod = " + paymentMethod +
                 '}';
     }
 }
