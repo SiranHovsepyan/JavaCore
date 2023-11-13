@@ -6,10 +6,38 @@ import onlineShop.enums.PaymentMethod;
 import onlineShop.model.Order;
 import onlineShop.model.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderStorage {
     Order[] orders = new Order[10];
     int size;
 
+//    with example ArrayList
+
+//    private List<Order> order =new ArrayList<>();
+//
+//    public void add(Order order){
+//        orders.add(order);
+//    }
+
+//    public void print(){
+//        for (Order order : orders) {
+//            System.out.println(order);
+//        }
+//    }
+
+
+//    public Order getById(String id){
+//        for (Order order : orders) {
+//            if (order.getOrderId().equals(id)){
+//                return order;
+//            }
+//        }
+//        return null;
+//    }
+
+//---------------------------------------------------------------------------------
     public void print() {
         for (int i = 0; i < size; i++) {
             System.out.println(orders[i]);
