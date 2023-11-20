@@ -1,14 +1,14 @@
-package onlineShop;
+package onlineShopWithCollections;
 
-import onlineShop.enums.*;
-import onlineShop.exceptions.OutOfStockException;
-import onlineShop.model.Order;
-import onlineShop.model.Product;
-import onlineShop.model.User;
-import onlineShop.storage.OrderStorage;
-import onlineShop.storage.ProductStorage;
-import onlineShop.storage.UserStorage;
-import onlineShop.util.UUIdUtil;
+import onlineShopWithCollections.enums.*;
+import onlineShopWithCollections.exceptions.OutOfStockException;
+import onlineShopWithCollections.model.Order;
+import onlineShopWithCollections.model.Product;
+import onlineShopWithCollections.model.User;
+import onlineShopWithCollections.storage.OrderStorage;
+import onlineShopWithCollections.storage.ProductStorage;
+import onlineShopWithCollections.storage.UserStorage;
+import onlineShopWithCollections.util.UUIdUtil;
 
 import java.util.Date;
 import java.util.Scanner;

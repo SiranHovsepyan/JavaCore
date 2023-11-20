@@ -1,7 +1,7 @@
 package classwork.chapter14.collection;
 
-import onlineShop.enums.UserAdminType;
-import onlineShop.model.User;
+import onlineShopWithCollections.enums.UserAdminType;
+import onlineShopWithCollections.model.User;
 
 import java.util.HashMap;
 import java.util.Map;

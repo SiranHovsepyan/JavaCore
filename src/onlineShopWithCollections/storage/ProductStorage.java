@@ -1,8 +1,8 @@
-package onlineShop.storage;
+package onlineShopWithCollections.storage;
 
-import onlineShop.enums.ProductsType;
-import onlineShop.exceptions.OutOfStockException;
-import onlineShop.model.Product;
+import onlineShopWithCollections.enums.ProductsType;
+import onlineShopWithCollections.exceptions.OutOfStockException;
+import onlineShopWithCollections.model.Product;
 
 public class ProductStorage {
     private Product[] products = new Product[10];
@@ -54,7 +54,7 @@ public class ProductStorage {
                 return qty;
             }
         }
-        throw new OutOfStockException("Out of stock");
+        throw new OutOfStockException ("Out of stock");
     }
 
     private void extend() {

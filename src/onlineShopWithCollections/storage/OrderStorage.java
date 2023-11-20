@@ -1,10 +1,10 @@
-package onlineShop.storage;
+package onlineShopWithCollections.storage;
 
-import onlineShop.enums.Answers;
-import onlineShop.enums.OrderStatus;
-import onlineShop.enums.PaymentMethod;
-import onlineShop.model.Order;
-import onlineShop.model.User;
+import onlineShopWithCollections.enums.Answers;
+import onlineShopWithCollections.enums.OrderStatus;
+import onlineShopWithCollections.enums.PaymentMethod;
+import onlineShopWithCollections.model.Order;
+import onlineShopWithCollections.model.User;
 
 public class OrderStorage {
     Order[] orders = new Order[10];
