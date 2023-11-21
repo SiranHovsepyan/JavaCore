@@ -3,36 +3,30 @@ package onlineShopWithCollections.storage;
 import onlineShopWithCollections.enums.UserAdminType;
 import onlineShopWithCollections.model.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserStorage {
-    private User[] users = new User[10];
-    private int size;
-
-    private void extend() {
-        User[] tmp = new User[users.length + 10];
-        System.arraycopy(users, 0, tmp, 0, users.length);
-    }
-
+    Map<String, User> users = new HashMap<>();
 
     public void addUserOrAdmin(User user) {
-        if (size == users.length) {
-            extend();
-        }
-        users[size++] = user;
+        users.put(user.getEmail(), user);
     }
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(users[i]);
+        for (User users : users.values()) {
+            System.out.println(users);
         }
     }
 
     public void printOnlyUsers() {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getType() == UserAdminType.USER) {
-                System.out.println(users[i].getType());
+        for (User onlyUser : users.values()) {
+            if (onlyUser.getType() == UserAdminType.USER) {
+                System.out.println(onlyUser);
             }
             System.out.println("USERS doesn`t exists");
         }
+
     }
 
     public UserAdminType getType(String userType) {
@@ -44,9 +38,9 @@ public class UserStorage {
     }
 
     public User getUserEmail(String email) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email)) {
-                return users[i];
+        for (User userEmail : users.values()) {
+            if (userEmail.getEmail().equals(email)) {
+                return userEmail;
             }
         }
         return null;
@@ -54,18 +48,18 @@ public class UserStorage {
 
 
     public User getUserEmailPassword(String email, String password) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
-                return users[i];
+        for (User userEmailPassword : users.values()) {
+            if (userEmailPassword.getEmail().equals(email) && userEmailPassword.getPassword().equals(password)) {
+                return userEmailPassword;
             }
         }
         return null;
     }
 
     public User getById(String userId) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getId().equals(userId)) {
-                return users[i];
+        for (User byUserId : users.values()) {
+            if (byUserId.getId().equals(userId)){
+                return byUserId;
             }
         }
         return null;

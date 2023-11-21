@@ -4,21 +4,20 @@ import onlineShopWithCollections.enums.ProductsType;
 import onlineShopWithCollections.exceptions.OutOfStockException;
 import onlineShopWithCollections.model.Product;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ProductStorage {
-    private Product[] products = new Product[10];
-    int size;
+    Set<Product> products = new HashSet<>();
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(products[i]);
+        for (Product product : products) {
+            System.out.println(product);
         }
     }
 
     public void addProducts(Product product) {
-        if (size == products.length) {
-            extend();
-        }
-        products[size++] = product;
+        products.add(product);
     }
 
     public ProductsType getType(String productType) {
@@ -31,35 +30,30 @@ public class ProductStorage {
     }
 
     public void removeProduct(String productId) {
-        for (int i = 0; i < size; i++) {
-            if (products[i].getProductId().equals(productId)) {
-                products[i] = products[i + 1];
+        for (Product product : products) {
+            if (product.getProductId().equals(productId)){
+                products.remove(product);
             }
         }
-        size--;
     }
 
     public Product getById(String productId) {
-        for (int i = 0; i < size; i++) {
-            if (products[i].getProductId().equals(productId)) {
-                return products[i];
+        for (Product productById : products) {
+            if (productById.getProductId().equals(productId)){
+                return productById;
             }
         }
         return null;
     }
 
     public int getProductQty(String id, int qty) throws OutOfStockException {
-        for (int i = 0; i < size; i++) {
-            if (products[i].getProductId().equals(id) && products[i].getStockQty() >= qty) {
+        for (Product productQty : products) {
+            if (productQty.getProductId().equals(id)&& productQty.getStockQty()>=qty){
                 return qty;
             }
         }
         throw new OutOfStockException ("Out of stock");
     }
 
-    private void extend() {
-        Product[] tmp = new Product[products.length + 10];
-        System.arraycopy(products, 0, tmp, 0, products.length);
-    }
 
 }

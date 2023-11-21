@@ -138,4 +138,7 @@ public class Order {
                 ", paymentMethod = " + paymentMethod +
                 '}';
     }
+
+    public void add(Order order) {
+    }
 }
