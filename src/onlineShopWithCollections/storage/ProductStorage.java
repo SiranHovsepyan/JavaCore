@@ -5,6 +5,7 @@ import onlineShopWithCollections.exceptions.OutOfStockException;
 import onlineShopWithCollections.model.Product;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class ProductStorage {
@@ -30,11 +31,23 @@ public class ProductStorage {
     }
 
     public void removeProduct(String productId) {
-        for (Product product : products) {
-            if (product.getProductId().equals(productId)){
-                products.remove(product);
+//        for (Product product : products) {
+//            if (product.getProductId().equals(productId)){
+//                products.remove(product);
+//            }
+//        }
+
+//        erb produktner shat en
+
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()){
+            Product next = iterator.next();
+            if (next.getProductId().equals(productId)){
+                iterator.remove();
             }
+
         }
+
     }
 
     public Product getById(String productId) {
